@@ -12,6 +12,7 @@ migrate = Migrate(app, db)
 
 from api.v1.routes import api as api_v1
 app.register_blueprint(api_v1, url_prefix='/v1')
+app.register_blueprint(api_v1, url_prefix='/v2')
 from api.v2.routes import api as api_v2
 app.register_blueprint(api_v2, url_prefix='/v2')
 

@@ -16,7 +16,7 @@ api = Blueprint('api_v1', __name__)
 
 
 @api.route('/signup', methods=['POST'])
-def add_user():
+def add_user() -> dict:
     """api for signup of a new user"""
     data = request.get_json()
     password = generate_password_hash(data['password'], method='sha256')
@@ -37,7 +37,7 @@ def add_user():
 
 
 @api.route('/login')
-def login():
+def login() -> dict:
     """api for login"""
     data = request.get_json()
     email = data['email']
@@ -63,7 +63,7 @@ def login():
 
 @api.route('/change-password')
 @token_required
-def change_password(current_user):
+def change_password(current_user: User) -> dict:
     """api to change password when user is logged in"""
     data = request.get_json()
     existing_password = data['password']
@@ -83,7 +83,7 @@ def change_password(current_user):
 
 @api.route('/logout')
 @token_required
-def logout(current_user):
+def logout(current_user: User) -> dict:
     """api for logout"""
     # setting the value of token to None when user logs out
     current_user.jwt_token = None
@@ -93,7 +93,7 @@ def logout(current_user):
 
 
 @api.route('/forgot-password-send-otp')
-def send_otp():
+def send_otp() -> dict:
     """api to send otp when user forgets his password"""
     data = request.get_json()
     if data['email']:
@@ -137,7 +137,7 @@ def send_otp():
 
 
 @api.route('/forgot-password-validate-otp')
-def validate_otp():
+def validate_otp() -> dict:
     """api for validating otp on forgot password request"""
     data = request.get_json()
     if data['email']:

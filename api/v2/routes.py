@@ -1,5 +1,4 @@
 from flask import request, Blueprint
-from api.v1.routes import api as api_v1
 from app import db
 from models import User
 from helpers import token_required
@@ -9,7 +8,7 @@ api = Blueprint('api', __name__)
 
 
 @api.route('/signup', methods=['POST'])
-def add_user():
+def add_user() -> dict:
     """api for signup"""
     data = request.get_json()
     password = generate_password_hash(data['password'], method='sha256')
@@ -29,7 +28,7 @@ def add_user():
 
 @api.route('/profile')
 @token_required
-def get_profile(current_user):
+def get_profile(current_user: User) -> dict:
     """api to get profile of current user"""
     return {
         "name": current_user.name,
