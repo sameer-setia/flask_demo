@@ -10,3 +10,4 @@ class User(db.Model):
     is_active = db.Column(db.Boolean(), default=True)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     jwt_token = db.Column(db.String())
+    address = db.Column(db.String())
