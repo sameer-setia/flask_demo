@@ -10,6 +10,7 @@ api = Blueprint('api', __name__)
 
 @api.route('/signup', methods=['POST'])
 def add_user():
+    """api for signup"""
     data = request.get_json()
     password = generate_password_hash(data['password'], method='sha256')
     existing_mobile = User.query.filter_by(mobile=data['mobile']).first()
@@ -29,6 +30,7 @@ def add_user():
 @api.route('/profile')
 @token_required
 def get_profile(current_user):
+    """api to get profile of current user"""
     return {
         "name": current_user.name,
         "mobile": current_user.mobile,
