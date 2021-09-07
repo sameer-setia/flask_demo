@@ -1,0 +1,11 @@
+flask
+pyjwt==2.0.0
+datetime
+uuid
+flask_sqlalchemy
+flask_migrate
+python-dotenv
+twilio
+sendgrid
+sqlalchemy
+werkzeug
