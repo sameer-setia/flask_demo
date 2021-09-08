@@ -75,6 +75,8 @@ def change_password(current_user: User) -> dict:
     if new_password != new_password1:
         # when both passwords entered are different
         return {'message': 'passwords do not match'}
+    if check_password_hash(current_user.password, new_password):
+        return {'message': 'new password cannot be same as old password'}
     current_user.password = generate_password_hash(new_password, method='sha256')
     db.session.add(current_user)
     db.session.commit()
