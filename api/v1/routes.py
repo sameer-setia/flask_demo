@@ -126,7 +126,7 @@ def send_otp() -> dict:
     # sendgrid api is used to send otp on mail
     message = Mail(
         from_email=os.environ.get('FROM_EMAIL'),
-        to_emails=data['email'],
+        to_emails=user.email_address,
         subject='Forgot Password - OTP',
         html_content=f'Hello {user.name} your otp for forget password is {otp}')
 
